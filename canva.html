@@ -1,203 +1,308 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-    }
+    <title>Reproductor Rossely</title>
 
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+    <style>
+        /* =========================
+       LIMPIEZA GENERAL
+    ========================== */
 
-    .reproductor {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .animacion-respirar {
-      width: min(78vw, 320px);
-      animation: respirar 3.2s ease-in-out infinite;
-    }
+        html,
+        body {
+            margin: 0;
+            padding: 0;
 
-    .boton-musica {
-      width: 100%;
-      padding: 0;
-      margin: 0;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      display: block;
-      -webkit-tap-highlight-color: transparent;
-      transition: transform 0.15s ease;
-    }
+            background: transparent !important;
 
-    .boton-musica img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    .boton-musica:active {
-      transform: scale(0.95);
-    }
-
-    @keyframes respirar {
-      0%,
-      100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.035);
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <main class="reproductor">
-
-    <div class="animacion-respirar">
-
-      <button
-        id="botonMusica"
-        class="boton-musica"
-        type="button"
-        aria-label="Reproducir música"
-        aria-pressed="false"
-      >
-
-        <img
-          id="imagenBoton"
-          src="https://alvarezzjosi.github.io/rossely-musica/assets/play.png"
-          alt="Dale Play"
-        >
-
-      </button>
-
-    </div>
-
-    <audio
-      id="musica"
-      src="https://alvarezzjosi.github.io/rossely-musica/assets/cancion.mp3"
-      preload="auto"
-    ></audio>
-
-  </main>
+            overflow: visible;
+        }
 
 
-  <script>
-    const boton = document.getElementById("botonMusica");
-    const imagen = document.getElementById("imagenBoton");
-    const musica = document.getElementById("musica");
+        /* =========================
+       CONTENEDOR DEL WIDGET
+    ========================== */
 
-    const imagenPlay =
-      "https://alvarezzjosi.github.io/rossely-musica/assets/play.png";
+        body {
+            display: inline-block;
+        }
 
-    const imagenPause =
-      "https://alvarezzjosi.github.io/rossely-musica/assets/pause.png";
+        .reproductor {
+            width: 320px;
+            padding: 15px;
 
-    let reproduciendo = false;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
 
-    musica.volume = 0.8;
+            background: transparent !important;
+        }
 
 
-    boton.addEventListener("click", async () => {
+        /* =========================
+       ANIMACIÓN DE RESPIRACIÓN
+    ========================== */
 
-      if (!reproduciendo) {
+        .animacion-respirar {
+            width: 100%;
 
-        try {
+            animation:
+                respirar 3.2s ease-in-out infinite;
 
-          await musica.play();
+            transform-origin: center center;
+        }
 
-          imagen.src = imagenPause;
-          imagen.alt = "Pausar canción";
 
-          boton.setAttribute(
-            "aria-label",
-            "Pausar música"
-          );
+        @keyframes respirar {
 
-          boton.setAttribute(
-            "aria-pressed",
-            "true"
-          );
+            0%,
+            100% {
+                transform: scale(1);
+            }
 
-          reproduciendo = true;
-
-        } catch (error) {
-
-          console.error(
-            "No se pudo reproducir la música:",
-            error
-          );
+            50% {
+                transform: scale(1.035);
+            }
 
         }
 
-      } else {
 
-        musica.pause();
+        /* =========================
+       BOTÓN
+    ========================== */
 
-        imagen.src = imagenPlay;
-        imagen.alt = "Dale Play";
+        .boton-musica {
+            width: 100%;
 
-        boton.setAttribute(
-          "aria-label",
-          "Reproducir música"
-        );
+            margin: 0;
+            padding: 0;
 
-        boton.setAttribute(
-          "aria-pressed",
-          "false"
-        );
+            display: block;
 
-        reproduciendo = false;
-      }
+            background: transparent !important;
+            border: none;
+            outline: none;
 
-    });
+            cursor: pointer;
+
+            -webkit-tap-highlight-color: transparent;
+
+            transition:
+                transform 0.15s ease,
+                filter 0.2s ease;
+        }
 
 
-    musica.addEventListener("ended", () => {
+        /* Cuando se toca */
 
-      imagen.src = imagenPlay;
-      imagen.alt = "Dale Play";
+        .boton-musica:active {
+            transform: scale(0.95);
+        }
 
-      boton.setAttribute(
-        "aria-label",
-        "Reproducir música"
-      );
 
-      boton.setAttribute(
-        "aria-pressed",
-        "false"
-      );
+        /* Pequeño brillo al pasar el cursor */
 
-      reproduciendo = false;
-    });
-  </script>
+        .boton-musica:hover {
+            filter: brightness(1.03);
+        }
+
+
+        /* =========================
+       IMAGEN
+    ========================== */
+
+        .boton-musica img {
+            width: 100%;
+            height: auto;
+
+            display: block;
+
+            object-fit: contain;
+
+            user-select: none;
+            -webkit-user-drag: none;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+       AUDIO
+    ========================== */
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <main class="reproductor">
+
+        <div class="animacion-respirar">
+
+            <button id="botonMusica" class="boton-musica" type="button" aria-label="Reproducir música"
+                aria-pressed="false">
+
+                <img id="imagenBoton" src="https://alvarezzjosi.github.io/rossely-musica/assets/play.png"
+                    alt="Dale Play">
+
+            </button>
+
+        </div>
+
+
+        <audio id="musica" src="https://alvarezzjosi.github.io/rossely-musica/assets/cancion.mp3"
+            preload="auto"></audio>
+
+    </main>
+
+
+    <script>
+
+        /* =========================
+           ELEMENTOS
+        ========================== */
+
+        const boton =
+            document.getElementById("botonMusica");
+
+        const imagen =
+            document.getElementById("imagenBoton");
+
+        const musica =
+            document.getElementById("musica");
+
+
+        /* =========================
+           ARCHIVOS
+        ========================== */
+
+        const imagenPlay =
+            "https://alvarezzjosi.github.io/rossely-musica/assets/play.png";
+
+        const imagenPause =
+            "https://alvarezzjosi.github.io/rossely-musica/assets/pause.png";
+
+
+        /* =========================
+           ESTADO
+        ========================== */
+
+        let reproduciendo = false;
+
+        musica.volume = 0.8;
+
+
+        /* Precargar ambas imágenes */
+
+        const precargaPlay = new Image();
+        precargaPlay.src = imagenPlay;
+
+        const precargaPause = new Image();
+        precargaPause.src = imagenPause;
+
+
+        /* =========================
+           CLICK
+        ========================== */
+
+        boton.addEventListener("click", async () => {
+
+            if (!reproduciendo) {
+
+                try {
+
+                    await musica.play();
+
+                    imagen.src = imagenPause;
+                    imagen.alt = "Pausar canción";
+
+                    boton.setAttribute(
+                        "aria-label",
+                        "Pausar música"
+                    );
+
+                    boton.setAttribute(
+                        "aria-pressed",
+                        "true"
+                    );
+
+                    reproduciendo = true;
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "No se pudo reproducir la música:",
+                        error
+                    );
+
+                }
+
+            }
+
+            else {
+
+                musica.pause();
+
+                imagen.src = imagenPlay;
+                imagen.alt = "Dale Play";
+
+                boton.setAttribute(
+                    "aria-label",
+                    "Reproducir música"
+                );
+
+                boton.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+
+                reproduciendo = false;
+
+            }
+
+        });
+
+
+        /* =========================
+           CUANDO TERMINA LA CANCIÓN
+        ========================== */
+
+        musica.addEventListener("ended", () => {
+
+            imagen.src = imagenPlay;
+            imagen.alt = "Dale Play";
+
+            boton.setAttribute(
+                "aria-label",
+                "Reproducir música"
+            );
+
+            boton.setAttribute(
+                "aria-pressed",
+                "false"
+            );
+
+            reproduciendo = false;
+
+        });
+
+    </script>
 
 </body>
+
 </html>
