@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Música XV Rossely</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <main class="reproductor">
+
+        <div class="animacion-respirar">
+
+            <button
+                id="botonMusica"
+                class="boton-musica"
+                type="button"
+                aria-label="Reproducir música"
+                aria-pressed="false"
+            >
+
+                <img
+                    id="imagenBoton"
+                    src="assets/play.png"
+                    alt="Dale Play"
+                >
+
+            </button>
+
+        </div>
+
+        <audio
+            id="musica"
+            src="assets/cancion.mp3"
+            preload="auto"
+        ></audio>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
