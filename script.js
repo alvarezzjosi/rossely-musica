@@ -19,7 +19,7 @@ boton.addEventListener("click", async () => {
             await musica.play();
 
             // Cambiar diseño
-            imagen.src = "assets/pause.png";
+            imagen.src = "assets/pause.webp";
             imagen.alt = "Pausar canción";
 
             // Accesibilidad
@@ -50,7 +50,7 @@ boton.addEventListener("click", async () => {
         musica.pause();
 
         // Volver al botón original
-        imagen.src = "assets/play.png";
+        imagen.src = "assets/play.webp";
         imagen.alt = "Dale Play";
 
         boton.setAttribute(
@@ -74,7 +74,7 @@ boton.addEventListener("click", async () => {
 
 musica.addEventListener("ended", () => {
 
-    imagen.src = "assets/play.png";
+    imagen.src = "assets/play.webp";
     imagen.alt = "Dale Play";
 
     boton.setAttribute(
