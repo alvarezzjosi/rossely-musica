@@ -156,7 +156,7 @@
                 aria-pressed="false">
 
                 <img id="imagenBoton" src="https://alvarezzjosi.github.io/rossely-musica/assets/play.png"
-                    alt="Dale Play">
+                    alt="Dale Play" fetchpriority="high">
 
             </button>
 
@@ -164,7 +164,7 @@
 
 
         <audio id="musica" src="https://alvarezzjosi.github.io/rossely-musica/assets/cancion.mp3"
-            preload="auto"></audio>
+            preload="none"></audio>
 
     </main>
 
@@ -190,10 +190,10 @@
         ========================== */
 
         const imagenPlay =
-            "https://alvarezzjosi.github.io/rossely-musica/assets/play.png";
+            "https://alvarezzjosi.github.io/rossely-musica/assets/play.webp";
 
         const imagenPause =
-            "https://alvarezzjosi.github.io/rossely-musica/assets/pause.png";
+            "https://alvarezzjosi.github.io/rossely-musica/assets/pause.webp";
 
 
         /* =========================
@@ -203,15 +203,6 @@
         let reproduciendo = false;
 
         musica.volume = 0.8;
-
-
-        /* Precargar ambas imágenes */
-
-        const precargaPlay = new Image();
-        precargaPlay.src = imagenPlay;
-
-        const precargaPause = new Image();
-        precargaPause.src = imagenPause;
 
 
         /* =========================
